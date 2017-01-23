@@ -45,3 +45,9 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/commons/commons/target/
+/engine/nbproject/private/
+/commons/target/
+/engine/target/
+/configurator/target/
+/server/target/
