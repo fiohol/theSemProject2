@@ -17,6 +17,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 *.war
+*.class
 
 # =========================
 # Operating System Files
@@ -48,8 +49,8 @@ Temporary Items
 .apdisk
 /commons/commons/target/
 /engine/nbproject/private/
-/commons/target/
-/engine/target/
-/configurator/target/
-/server/target/
-/client/target/
+#/commons/target/
+#/engine/target/
+#/configurator/target/
+#/server/target/
+#/client/target/

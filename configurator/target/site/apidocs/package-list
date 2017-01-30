@@ -1,0 +1,4 @@
+org.thesemproject.configurator.gui
+org.thesemproject.configurator.gui.modelEditor
+org.thesemproject.configurator.gui.process
+org.thesemproject.configurator.gui.utils
