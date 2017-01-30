@@ -24,9 +24,9 @@ import org.thesemproject.configurator.gui.utils.DictionaryUtils;
 import org.thesemproject.configurator.gui.utils.CapturesUtils;
 import org.thesemproject.configurator.gui.utils.GuiUtils;
 import org.thesemproject.configurator.gui.modelEditor.ModelEditor;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.engine.classification.MulticlassEngine;
-import org.thesemproject.engine.classification.NodeData;
+import org.thesemproject.engine.classification.TrainableNodeData;
 import org.thesemproject.engine.segmentation.gui.CaptureTreeNode;
 import org.thesemproject.engine.segmentation.gui.DataProviderTreeNode;
 import org.thesemproject.engine.segmentation.gui.DataProviderTreeRelationshipNode;
@@ -7522,7 +7522,7 @@ public class SemGui extends javax.swing.JFrame {
 
     private void classStartLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classStartLevelActionPerformed
         ME.getRoot().setStartLevel(classStartLevel.getSelectedIndex() + 1);
-        ME.storeXml(NodeData.getDocument(ME.getRoot()));
+        ME.storeXml(TrainableNodeData.getDocument(ME.getRoot()));
         firstLevelOnly.setText("Livello " + (classStartLevel.getSelectedIndex() + 1));
         needUpdate = true;
     }//GEN-LAST:event_classStartLevelActionPerformed
@@ -11250,7 +11250,7 @@ public class SemGui extends javax.swing.JFrame {
             }
             initLabel.setText("Build classification tree...");
             LogGui.info("Build classification tree...");
-            NodeData root = ME.getRoot(); // Disegna l'albero
+            TrainableNodeData root = ME.getRoot(); // Disegna l'albero
             javax.swing.tree.DefaultMutableTreeNode clResults = new javax.swing.tree.DefaultMutableTreeNode("Classificazione");
             GuiUtils.paintTree(root, clResults);
 

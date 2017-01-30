@@ -15,7 +15,7 @@
  */
 package org.thesemproject.configurator.gui;
 
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.engine.segmentation.SegmentConfiguration;
 import org.thesemproject.engine.segmentation.SegmentationResults;
 import org.thesemproject.engine.segmentation.SegmentationUtils;

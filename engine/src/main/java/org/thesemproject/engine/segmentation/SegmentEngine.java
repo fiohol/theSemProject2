@@ -15,7 +15,7 @@
  */
 package org.thesemproject.engine.segmentation;
 
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.engine.classification.MulticlassEngine;
 
 import java.io.File;
@@ -46,7 +46,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import org.thesemproject.commons.classification.IClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.commons.utils.CommonUtils;
 import org.thesemproject.engine.classification.Tokenizer;
 import org.thesemproject.engine.segmentation.gui.CapturesGroupTreeNode;
@@ -229,7 +229,8 @@ public class SegmentEngine {
                     if (match) {
                         break;
                     } else //Provo a vedere se c'è un match con linea precedente + \n linea 
-                     if (lastLine.length() != 0) {
+                    {
+                        if (lastLine.length() != 0) {
                             String newLine = lastLine + "@" + line;
                             for (Pattern pattern : patterns) {
                                 if (pattern.matcher(newLine).find()) { //ha matchato la sezione
@@ -259,6 +260,7 @@ public class SegmentEngine {
                                 }
                             }
                         }
+                    }
                 }
                 if (previousLines.length() != 0) {
                     previousLines = previousLines + " " + line;
@@ -900,7 +902,7 @@ public class SegmentEngine {
                 cc.addBlockedCapture(blocked);
             } else if ("classification".equalsIgnoreCase(captureChildren.getName()) || "cl".equalsIgnoreCase(captureChildren.getName())) {
                 String path = captureChildren.getValue();
-                IClassificationPath cp = new ClassificationPath("Bayes");
+                ClassificationPath cp = new ClassificationPath("Bayes");
                 cp = CommonUtils.getClassificationPath(path, cp);
                 if (me != null) {
                     if (me.getRoot() != null) {

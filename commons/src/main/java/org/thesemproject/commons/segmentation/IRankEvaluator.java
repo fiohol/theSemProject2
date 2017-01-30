@@ -25,6 +25,13 @@ import java.io.Serializable;
 public interface IRankEvaluator extends Serializable {
 
     /**
+     * Chiave per identificare il concetto di classificazione come primo
+     * elemento della chiave (il secondo dovrà essere il valore della
+     * classificazione)
+     */
+    public static final String CLASSIFICATIONS = "[Classifications]";
+
+    /**
      * Condizione uguale a
      */
     String EQUALS = "=";

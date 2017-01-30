@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.thesemproject.engine.classification;
+package org.thesemproject.commons.classification;
 
-
+import com.fasterxml.jackson.databind.JsonNode;
 import java.text.DecimalFormat;
-import org.thesemproject.commons.classification.IClassificationPath;
 
 /**
  *
  * Identifica il percorso di classificazione di un documento
  */
-public class ClassificationPath implements IClassificationPath {
+public class ClassificationPath {
 
     /**
      * Costante che identifica una classificazione fatta attraverso il
      * classificatore Bayesiano (Lucene)
      */
     public static final String BAYES = "Bayes";
-    
+
     /**
      * Tipo classificazione cattura
      */
@@ -41,9 +40,18 @@ public class ClassificationPath implements IClassificationPath {
      * classificatore Key nearest neighbour (Lucene)
      */
     public static final String KNN = "Knn";
-    String technology;
-    double[] score;
-    String[] path;
+    /**
+     * Tecnologia utilizzata per classificare
+     */
+    protected String technology;
+    /**
+     * Punteggio per livello
+     */
+    protected double[] score;
+    /**
+     * Livelli di classificazione
+     */
+    protected String[] path;
 
     /**
      * Istanzia l'oggetto ClassificationPath vuoto Nella versione 1.1 la max
@@ -58,6 +66,57 @@ public class ClassificationPath implements IClassificationPath {
     }
 
     /**
+     * Costruttore a partire da un classification path;
+     *
+     * @param cp classificationPath
+     */
+    public ClassificationPath(ClassificationPath cp) {
+        this.technology = cp.technology;
+        this.path = cp.path;
+        this.score = cp.score;
+    }
+
+    /**
+     * Costruisce un percorso di navigazione a partire da un JSON
+     * @param node Nodo JSON
+     */
+    public ClassificationPath(JsonNode node) {
+        this.technology = node.get("technology").textValue();
+        this.score = new double[MAX_DEEP];
+        this.path = new String[MAX_DEEP];
+        JsonNode scoreNode = node.get("score");
+        int i = 0;
+        for (final JsonNode objNode : scoreNode) {
+            if (i < MAX_DEEP) {
+                this.score[i++] = objNode.asDouble();
+            }
+        }
+        JsonNode pathNode = node.get("path");
+        i = 0;
+        for (final JsonNode objNode : pathNode) {
+            if (i < MAX_DEEP) {
+                this.path[i++] = objNode.textValue();
+            }
+        }
+
+    }
+
+    /**
+     * Crea un classificationPath clone di quello contenuto nell'oggetto
+     *
+     * @return clone
+     */
+    @Override
+    public ClassificationPath clone() {
+        ClassificationPath cp = new ClassificationPath(technology);
+        for (int i = 0; i < path.length; i++) {
+            cp.path[i] = path[i];
+            cp.score[i] = score[i];
+        }
+        return cp;
+    }
+
+    /**
      * Aggiunge un risultato di classificazione
      *
      * @param nodeName Nome del nodo (categoria) su cui l'oggetto è classificato
@@ -65,7 +124,6 @@ public class ClassificationPath implements IClassificationPath {
      * @param level livello di classificazione (da 5 a 0). O è il livello base 5
      * è la foglia
      */
-    @Override
     public void addResult(String nodeName, double score, int level) {
         if (level < 0 || level > (MAX_DEEP - 1)) {
             return;
@@ -80,7 +138,6 @@ public class ClassificationPath implements IClassificationPath {
      * @param level livello del nodo
      * @return nome del nodo
      */
-    @Override
     public String getNodeName(int level) {
         return this.path[level];
     }
@@ -91,7 +148,6 @@ public class ClassificationPath implements IClassificationPath {
      * @param level livello
      * @return score
      */
-    @Override
     public double getNodeScore(int level) {
         return this.score[level];
     }
@@ -101,7 +157,6 @@ public class ClassificationPath implements IClassificationPath {
      *
      * @return tecnologia utilizzata
      */
-    @Override
     public String getTechnology() {
         return technology;
     }
@@ -112,7 +167,6 @@ public class ClassificationPath implements IClassificationPath {
      *
      * @return array degli score
      */
-    @Override
     public double[] getScore() {
         return score;
     }
@@ -130,7 +184,6 @@ public class ClassificationPath implements IClassificationPath {
      *
      * @return path
      */
-    @Override
     public String[] getPath() {
         return path;
     }
@@ -147,7 +200,6 @@ public class ClassificationPath implements IClassificationPath {
      *
      * @return rappresentazione stringa della classificazione
      */
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(technology).append(": ");
@@ -169,7 +221,6 @@ public class ClassificationPath implements IClassificationPath {
      *
      * @return rappresentazione stringa della classificazione
      */
-    @Override
     public String toSmallString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < MAX_DEEP; i++) {
@@ -190,7 +241,6 @@ public class ClassificationPath implements IClassificationPath {
      *
      * @return rappresentazione stringa della classificazione
      */
-    @Override
     public String toSmallClassString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < MAX_DEEP; i++) {
@@ -211,7 +261,6 @@ public class ClassificationPath implements IClassificationPath {
      *
      * @return foglia su cui è classificato l'item
      */
-    @Override
     public String getLeaf() {
         String ret = new String();
         for (int i = 0; i < MAX_DEEP; i++) {
@@ -234,11 +283,8 @@ public class ClassificationPath implements IClassificationPath {
      *
      * @param technology
      */
-    @Override
     public void setTechnology(String technology) {
         this.technology = technology;
     }
 
-    
-    
 }

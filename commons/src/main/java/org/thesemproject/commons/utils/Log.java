@@ -15,6 +15,7 @@
  */
 package org.thesemproject.commons.utils;
 
+import javax.servlet.ServletContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,10 +23,12 @@ import org.apache.logging.log4j.Logger;
  * La classe gestisce il logging di piattaforma attraverso Log4J
  */
 public final class Log {
+
     /**
      * Logger di classe
      */
     private static final Logger logger = LogManager.getLogger(Log.class);
+    private static ServletContext context = null;
 
     /**
      * Livello di stack
@@ -39,6 +42,18 @@ public final class Log {
      */
     public static void info(final String msg) {
         logger.info(prepare(msg));
+        if (context != null) {
+            context.log(msg);
+        }
+    }
+
+    /**
+     * Imposta il contesto servlet su cui loggare
+     *
+     * @param context contesto servlet
+     */
+    public static void setContext(ServletContext context) {
+        Log.context = context;
     }
 
     /**
@@ -48,6 +63,9 @@ public final class Log {
      */
     public static void debug(final String msg) {
         logger.debug(prepare(msg));
+        if (context != null) {
+            context.log(msg);
+        }
     }
 
     /**
@@ -57,6 +75,9 @@ public final class Log {
      */
     public static void error(final String msg) {
         logger.error(prepare(msg));
+        if (context != null) {
+            context.log(msg);
+        }
     }
 
     /**
@@ -77,6 +98,9 @@ public final class Log {
      */
     public static void warning(final String msg) {
         logger.warn(prepare(msg));
+        if (context != null) {
+            context.log(msg);
+        }
     }
 
     /**
@@ -86,6 +110,9 @@ public final class Log {
      */
     public static void warn(final String msg) {
         logger.warn(prepare(msg));
+        if (context != null) {
+            context.log(msg);
+        }
     }
 
     /**
@@ -150,6 +177,4 @@ public final class Log {
         logger.error(msg);
     }
 
-     
 }
-

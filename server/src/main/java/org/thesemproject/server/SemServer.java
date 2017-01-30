@@ -26,14 +26,15 @@ import java.util.Map;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import org.bson.Document;
+import org.json.JSONObject;
 import org.mcavallo.opencloud.Cloud;
 import org.thesemproject.commons.tagcloud.TagCloudResults;
 import org.thesemproject.commons.utils.LogGui;
 import org.thesemproject.commons.utils.interning.InternPool;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.engine.classification.MulticlassEngine;
 import org.thesemproject.engine.classification.MyAnalyzer;
-import org.thesemproject.engine.classification.NodeData;
+import org.thesemproject.engine.classification.TrainableNodeData;
 import org.thesemproject.engine.classification.Tokenizer;
 import org.thesemproject.engine.parser.DocumentParser;
 import org.thesemproject.engine.segmentation.SegmentConfiguration;
@@ -348,7 +349,7 @@ public class SemServer {
      *
      * @return nodo Root
      */
-    public NodeData getClassificationTree() {
+    public TrainableNodeData getClassificationTree() {
         return multiclassEngine.getRoot();
     }
 
@@ -421,14 +422,14 @@ public class SemServer {
     }
 
     /**
-     * Ritorna un BSon a partire dalla segmentazione
+     * Ritorna un JSON a partire dalla segmentazione
      *
      * @param results segmentazione
-     * @return Rappresentazione BSon
+     * @return Rappresentazione JSON
      * @throws Exception eccezione
      */
-    public Document getDocument(Map<SegmentConfiguration, List<SegmentationResults>> results) throws Exception {
-        Document document = new Document();
+    public JSONObject getDocument(Map<SegmentConfiguration, List<SegmentationResults>> results) throws Exception {
+        JSONObject document = new JSONObject();
         document = SegmentationUtils.getDocument(document, results);
         if (!rankEvaluations.isEmpty()) {
             for (String rankName : rankEvaluations.keySet()) {
@@ -486,6 +487,7 @@ public class SemServer {
             re = new RankEvaluations();
         }
         re.addRule(evaluator);
+        rankEvaluations.put(evaluatorName, re);
     }
 
     /**

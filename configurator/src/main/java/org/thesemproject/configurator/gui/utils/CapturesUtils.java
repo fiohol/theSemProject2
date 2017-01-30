@@ -16,7 +16,7 @@
 package org.thesemproject.configurator.gui.utils;
 
 import java.awt.Color;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.configurator.gui.SemGui;
 import org.thesemproject.engine.segmentation.gui.CaptureTreeNode;
 import org.thesemproject.engine.segmentation.gui.ModelTreeNode;

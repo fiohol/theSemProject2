@@ -24,6 +24,8 @@ import org.thesemproject.commons.utils.Log;
  */
 public class SemServerLog {
 
+    private static boolean init = false;
+
     /**
      * Stampa un messaggio nel log del J2EE container e sul log Log4J
      *
@@ -31,12 +33,14 @@ public class SemServerLog {
      */
     public static void info(String message) {
         if (SemServerConfiguration.getContext() != null) {
-            SemServerConfiguration.getContext().log(message);
-
-        } else {
-            System.out.println(message);
-        }
+            if (!init) {
+                Log.setContext(SemServerConfiguration.getContext());
+                init = true;
+            }
+            //SemServerConfiguration.getContext().log(message);
+        } 
         Log.info(message);
+
     }
 
     /**

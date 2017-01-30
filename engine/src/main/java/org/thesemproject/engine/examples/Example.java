@@ -15,7 +15,7 @@
  */
 package org.thesemproject.engine.examples;
 
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.engine.classification.MulticlassEngine;
 import org.thesemproject.engine.classification.MyAnalyzer;
 import org.thesemproject.engine.classification.Tokenizer;
@@ -36,6 +36,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.Document;
+import org.json.JSONObject;
 import org.mcavallo.opencloud.Cloud;
 import org.mcavallo.opencloud.Tag;
 
@@ -121,7 +122,7 @@ public class Example {
         //Per avere il tagging in HTML
         String html = SegmentationUtils.getHtml(results, language);
         //Per avere in JSON gerarchico
-        Document document = new Document();
+        JSONObject document = new JSONObject();
         document = SegmentationUtils.getDocument(document, results2);
         //In ogni caso basta visualizzare SegmentsUtils per vedere come trattare i result
 

@@ -34,6 +34,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.bson.Document;
 import org.thesemproject.commons.utils.BSonUtils;
 import static org.apache.uima.util.FileUtils.getFiles;
+import org.json.JSONObject;
 
 /**
  *
@@ -45,12 +46,12 @@ public class ReadSegmentWrite {
     /**
      * Coda dei documenti letti
      */
-    protected final Queue<Document> toDoList;
+    protected final Queue<JSONObject> toDoList;
 
     /**
      * Coda dei documenti processati
      */
-    protected final Queue<Document> toWriteList;
+    protected final Queue<JSONObject> toWriteList;
 
     /**
      * true se sta ancora popolando la toDoList
@@ -100,7 +101,7 @@ public class ReadSegmentWrite {
             executor.add(() -> {
                 LogGui.info("Init tagging thread ");
                 while (true) {
-                    Document document = toDoList.poll(); //Prende la testa della coda
+                    JSONObject document = toDoList.poll(); //Prende la testa della coda
                     if (document == null) {
                         //Se è nullo o la coda è vuota o ha finito
                         if (!isReading.getValue()) {
@@ -138,7 +139,7 @@ public class ReadSegmentWrite {
                 return file;
             }).map((file) -> {
                 String text = dp.getTextFromFile(file, ocrInstallPath);
-                Document document = new Document();
+                JSONObject document = new JSONObject();
                 document.put(BSonUtils.TEXT, text);
                 document.put(BSonUtils.SOURCE, file.getName());
                 document.put("Language", dp.getLanguageFromText(text));
@@ -164,7 +165,7 @@ public class ReadSegmentWrite {
                 AtomicInteger rr = new AtomicInteger(0);
                 while (true) {
                     //Ciclo infinito
-                    Document document = toWriteList.poll(); //Prende la testa della coda
+                    JSONObject document = toWriteList.poll(); //Prende la testa della coda
                     if (document == null) {
                         //Non c'è da scrivere
                         if (segmentThread.get() <= 0) {

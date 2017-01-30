@@ -49,7 +49,7 @@ import org.mcavallo.opencloud.Tag;
 import org.thesemproject.commons.tagcloud.TagClass;
 import org.thesemproject.commons.tagcloud.TagCloudResults;
 import org.thesemproject.configurator.gui.process.SegmentationExcelWriter;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.engine.classification.MyAnalyzer;
 import org.thesemproject.engine.classification.Tokenizer;
 import org.thesemproject.engine.segmentation.SegmentConfiguration;

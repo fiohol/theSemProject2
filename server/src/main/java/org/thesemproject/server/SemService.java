@@ -15,6 +15,7 @@
  */
 package org.thesemproject.server;
 
+import org.thesemproject.commons.utils.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -27,8 +28,13 @@ import javax.imageio.ImageIO;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import org.bson.Document;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.jdom2.output.XMLOutputter;
+import org.json.JSONObject;
+import org.mcavallo.opencloud.Cloud;
+import org.mcavallo.opencloud.Tag;
+
+import org.thesemproject.commons.classification.ClassificationPath;
+import org.thesemproject.engine.classification.TrainableNodeData;
 import org.thesemproject.engine.segmentation.functions.rank.RankEvaluator;
 
 /**
@@ -68,7 +74,8 @@ public class SemService {
         return execute(serverName, "Server Details", new SemServerTask() {
             @Override
             public Object excecute(SemServer sem) throws Exception {
-                return sem.getXML();
+                XMLOutputter outp = new XMLOutputter();
+                return outp.outputString(sem.getXML());
             }
         });
     }
@@ -372,7 +379,8 @@ public class SemService {
                 if (!file.exists()) {
                     return new byte[0];
                 }
-                return getBytesFromImage(sem.getPictureFromFile(file));
+                BufferedImage bi = sem.getPictureFromFile(file);
+                return getBytesFromImage(bi);
             } catch (Exception e) {
                 return new byte[0];
             }
@@ -446,17 +454,16 @@ public class SemService {
         return execute(serverName, "Classification Tree", new SemServerTask() {
             @Override
             public Object excecute(SemServer sem) throws Exception {
-                return sem.getClassificationTree();
+                return TrainableNodeData.getCSVDocument(sem.getClassificationTree());
             }
         });
     }
-
-   
 
     /**
      * Aggiunge un valutatore
      *
      * @param serverName nome del server
+     * @param name nome dell'evaluator
      * @param field field
      * @param fieldConditionOperator operatore
      * @param fieldConditionValue valore
@@ -470,6 +477,7 @@ public class SemService {
      */
     @WebMethod(operationName = "addEvaluation")
     public String addEvaluation(@WebParam(name = "server") final String serverName,
+            @WebParam(name = "name") final String name,
             @WebParam(name = "field") final String field,
             @WebParam(name = "fieldConditionOperator") final String fieldConditionOperator,
             @WebParam(name = "fieldConditionValue") final String fieldConditionValue,
@@ -482,7 +490,7 @@ public class SemService {
             @Override
             public Object excecute(SemServer sem) throws Exception {
                 RankEvaluator evaluator = new RankEvaluator(field, fieldConditionOperator, fieldConditionValue, startPeriod, endPeriod, duration, durationCondition, score);
-                sem.addEvaluation(serverName, evaluator);
+                sem.addEvaluation(name, evaluator);
                 return "Evaluation correctly added";
             }
         });
@@ -520,7 +528,8 @@ public class SemService {
         return execute(serverName, "Tag Cloud", new SemServerTask() {
             @Override
             public Object excecute(SemServer sem) throws Exception {
-                return sem.tagCloud(text, max);
+                Cloud c = sem.tagCloud(text, max);
+                return c;
             }
         });
     }
@@ -602,18 +611,37 @@ public class SemService {
     private String getServerMessage(String message, Object content) {
         try {
             String json;
-            if (content instanceof Document) {
-                Document doc = (Document) content;
-                json = doc.toJson();
+            if (content instanceof JSONObject) {
+                JSONObject doc = (JSONObject) content;
+                json = doc.toString();
+            } else if (content instanceof List) {
+                List<String> toMap = new ArrayList<>();
+                List cList = (List) content;
+                for (Object o : cList) {
+                    String element = mapper.writeValueAsString(o);
+                    toMap.add(element);
+                }
+                json = mapper.writeValueAsString(toMap);
+            } else if (content instanceof Cloud) {
+                Cloud c = (Cloud) content;
+                List<Tag> tags = c.allTags();
+                List<String> ret = new ArrayList<>();
+                for (Tag tag:tags) {
+                    JSONObject jo = new JSONObject();
+                    jo.put("name", tag.getName());
+                    jo.put("link", tag.getLink());
+                    jo.put("score",tag.getScore());
+                    ret.add(jo.toString());
+                }
+                json = mapper.writeValueAsString(ret);
             } else {
                 json = mapper.writeValueAsString(content);
             }
-            SemServerMessage msg = new SemServerMessage(message, json);
+            Message msg = new Message(message, json);
             return mapper.writeValueAsString(msg);
         } catch (Exception e) {
-
+            return getError(e.getLocalizedMessage());
         }
-        return null;
 
     }
 
@@ -641,6 +669,7 @@ public class SemService {
             try {
                 return getServerMessage(message, task.excecute(sem));
             } catch (Exception e) {
+                e.printStackTrace();
                 return getError(e.getMessage());
             }
         }

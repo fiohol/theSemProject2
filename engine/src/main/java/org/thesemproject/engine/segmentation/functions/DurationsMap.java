@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
+import org.thesemproject.commons.segmentation.IRankEvaluator;
 import org.thesemproject.engine.segmentation.CaptureConfiguration;
 
 import org.thesemproject.engine.segmentation.SegmentConfiguration;
@@ -228,7 +229,7 @@ public class DurationsMap {
                         if (s.isClassify()) {
                             List<ClassificationPath> bayes = sr.getClassificationPaths();
                             for (ClassificationPath cp : bayes) {
-                                Pair row = Pair.of(CLASSIFICATIONS, cp.getLeaf());
+                                Pair row = Pair.of(IRankEvaluator.CLASSIFICATIONS, cp.getLeaf());
                                 durations.update(row, sr.getDurations());
                             }
 
@@ -245,12 +246,6 @@ public class DurationsMap {
         return durationsMap;
     }
 
-    /**
-     * Chiave per identificare il concetto di classificazione come primo
-     * elemento della chiave (il secondo dovrà essere il valore della
-     * classificazione)
-     */
-    public static final String CLASSIFICATIONS = "[Classifications]";
 
     /**
      * Ritorna true se l'annno di fine è stato estratto in tutte le esperienze

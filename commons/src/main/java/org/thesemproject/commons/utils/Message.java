@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.thesemproject.server;
+package org.thesemproject.commons.utils;
 
 /**
  * Gestisce il messaggio di ritorno di un webservice che verrà convertito in
@@ -21,7 +21,7 @@ package org.thesemproject.server;
  *
  * @author The Sem Project
  */
-public class SemServerMessage {
+public class Message {
 
     private String message;
     private String content;
@@ -29,7 +29,7 @@ public class SemServerMessage {
     /**
      * Crea un nuovo messaggio di risposta
      */
-    public SemServerMessage() {
+    public Message() {
         message = new String();
         content = new String();
     }
@@ -40,7 +40,7 @@ public class SemServerMessage {
      * @param message messaggio
      * @param content contenuto in formato JSON
      */
-    public SemServerMessage(String message, String content) {
+    public Message(String message, String content) {
         this.message = message;
         this.content = content;
     }

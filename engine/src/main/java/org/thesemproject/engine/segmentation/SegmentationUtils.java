@@ -15,7 +15,7 @@
  */
 package org.thesemproject.engine.segmentation;
 
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.commons.utils.LogGui;
 import org.thesemproject.engine.segmentation.functions.DurationsMap;
 import java.io.IOException;
@@ -28,8 +28,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bson.Document;
+import org.json.JSONObject;
 import org.thesemproject.commons.utils.BSonUtils;
 
 /**
@@ -42,10 +44,10 @@ public class SegmentationUtils {
      *
      * @param document BSON in cui inserire i risultati
      * @param identifiedSegments risultato della segmentazione
-     * @return Documento BSON con i risultati della segmentazione
+     * @return Documento JSON con i risultati della segmentazione
      * @throws Exception Eccezione
      */
-    public static Document getDocument(Document document, Map<SegmentConfiguration, List<SegmentationResults>> identifiedSegments) throws Exception {
+    public static JSONObject getDocument(JSONObject document, Map<SegmentConfiguration, List<SegmentationResults>> identifiedSegments) throws Exception {
         return writeDocumentSegments(document, identifiedSegments, "");
     }
 
@@ -537,14 +539,15 @@ public class SegmentationUtils {
         return ret;
     }
 
-    private static Document writeDocumentSegments(Document document, Map<SegmentConfiguration, List<SegmentationResults>> identifiedSegments, String parentName) throws Exception {
+    private static JSONObject writeDocumentSegments(JSONObject document, Map<SegmentConfiguration, List<SegmentationResults>> identifiedSegments, String parentName) throws Exception {
         Set<SegmentConfiguration> segments = identifiedSegments.keySet();
         for (SegmentConfiguration s : segments) {
             String segmentName = (parentName.length() > 0 ? parentName + "." : "") + s.getName();
             Map<String, Integer> cellIndex = null;
             List<SegmentationResults> srs = identifiedSegments.get(s);
+            int srCount = 0;
             for (SegmentationResults sr : srs) {
-                Document segmentDocument = new Document();
+                JSONObject segmentDocument = new JSONObject();
                 if (s.getName().equalsIgnoreCase("Not Identified")) {
                     s.setName("");
                     segmentName = parentName;
@@ -557,8 +560,8 @@ public class SegmentationUtils {
                     Document timeline = new Document();
                     timeline.put("DurationYears", duration);
                     timeline.put("DurationYearsAbsolute", sr.getIntDurationYears());
-                    timeline.put("Years", sr.getYears());
-                    timeline.put("Months", sr.getMonths());
+                    timeline.put("Years", StringUtils.join(sr.getYears(), " "));
+                    timeline.put("Months", StringUtils.join(sr.getMonths(), " "));
                     segmentDocument.put("Timeline", timeline);
                 }
                 Map<SegmentConfiguration, List<SegmentationResults>> subSegments = sr.getSubsentencies();
@@ -581,12 +584,13 @@ public class SegmentationUtils {
                     if (s.isClassify()) {
                         List<ClassificationPath> cps = sr.getClassificationPaths();
                         for (int i = 0; i < cps.size(); i++) {
-                            document.put("BayesPath" + (i + 1), cps.get(i).getPath());
-                            document.put("BayesScore" + (i + 1), cps.get(i).getScore());
+                            segmentDocument.put("BayesPath" + (i + 1), cps.get(i).getPath());
+                            segmentDocument.put("BayesScore" + (i + 1), cps.get(i).getScore());
                         }
                     }
                 }
-                document.append("Segment", segmentDocument);
+                document.append("Segment." + segmentName + "." + srCount, segmentDocument);
+                srCount++;
             }
         }
         return document;

@@ -16,6 +16,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.war
 
 # =========================
 # Operating System Files
@@ -51,3 +52,4 @@ Temporary Items
 /engine/target/
 /configurator/target/
 /server/target/
+/client/target/

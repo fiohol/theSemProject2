@@ -209,6 +209,9 @@ public class SemServerConfiguration {
         updateConfiguration();
     }
 
+    /**
+     * Fa lo shutdown del server
+     */
     public void shutdown() {
         context.log("Shutdown server");
         for (SemServer sem : configurations.values()) {

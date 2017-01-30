@@ -29,7 +29,7 @@ import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.engine.segmentation.CaptureConfiguration;
 import org.thesemproject.engine.segmentation.SegmentConfiguration;
 import org.thesemproject.engine.segmentation.SegmentEngine;

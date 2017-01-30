@@ -30,10 +30,11 @@ import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import org.thesemproject.commons.segmentation.IRankEvaluator;
 import org.thesemproject.commons.utils.LogGui;
 import org.thesemproject.configurator.gui.SemGui;
 import org.thesemproject.engine.segmentation.gui.CaptureTreeNode;
-import org.thesemproject.engine.classification.NodeData;
+import org.thesemproject.engine.classification.TrainableNodeData;
 import org.thesemproject.engine.segmentation.functions.DurationsMap;
 import org.thesemproject.engine.segmentation.functions.rank.RankEvaluations;
 import org.thesemproject.engine.segmentation.functions.rank.RankEvaluator;
@@ -57,10 +58,10 @@ public class RankUtils {
     public static void manageRankName(SemGui sem) {
         int idx = sem.getFieldRankName().getSelectedIndex();
         if (idx != -1) {
-            if (DurationsMap.CLASSIFICATIONS.equals(sem.getFieldRankName().getSelectedItem())) {
+            if (IRankEvaluator.CLASSIFICATIONS.equals(sem.getFieldRankName().getSelectedItem())) {
                 //Classificazione
                 //Se è classificazione devo popolare la popup delle classi
-                NodeData root = sem.getME().getRoot();
+                TrainableNodeData root = sem.getME().getRoot();
                 List<String> children = root.visitSubTree(null);
                 Collections.sort(children);
                 String[] classValues = new String[children.size()];
@@ -269,7 +270,7 @@ public class RankUtils {
             }
         });
         String[] values = new String[gcxz.size() + 1];
-        values[0] = DurationsMap.CLASSIFICATIONS;
+        values[0] = IRankEvaluator.CLASSIFICATIONS;
         for (int i = 0; i < gcxz.size(); i++) {
             values[i + 1] = (gcxz.get(i).getNodeName());
         }

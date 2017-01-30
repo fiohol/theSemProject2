@@ -19,7 +19,7 @@ import org.thesemproject.commons.utils.ParallelProcessor;
 import org.thesemproject.commons.utils.FinalBoolean;
 import org.thesemproject.engine.classification.MulticlassEngine;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.commons.utils.LogGui;
 import org.thesemproject.engine.parser.DocumentParser;
 import java.io.FileInputStream;

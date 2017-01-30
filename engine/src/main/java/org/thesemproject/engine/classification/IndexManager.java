@@ -44,6 +44,7 @@ import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.TermQuery;
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.thesemproject.commons.classification.NodeData;
 import org.thesemproject.commons.utils.CommonUtils;
 import org.thesemproject.commons.utils.Log;
 import org.thesemproject.commons.utils.StringUtils;
@@ -96,45 +97,6 @@ public class IndexManager {
      */
     public static final String UUID = "uuid";
 
-    /**
-     * Identifica il nome del field che deve contenere l'ID della categoria di
-     * primo livello dove è classificato il documento
-     */
-    public static final String LEVEL_1 = "level1";
-
-    /**
-     * Identifica il nome del field che deve contenere l'ID della categoria di
-     * secondo livello dove è classificato il documento
-     */
-    public static final String LEVEL_2 = "level2";
-
-    /**
-     * Identifica il nome del field che deve contenere l'ID della categoria di
-     * terzo livello dove è classificato il documento
-     */
-    public static final String LEVEL_3 = "level3";
-
-    /**
-     * Identifica il nome del field che deve contenere l'ID della categoria di
-     * quarto livello dove è classificato il documento
-     */
-    public static final String LEVEL_4 = "level4";
-
-    /**
-     * Identifica il nome del field che deve contenere l'ID della categoria di
-     * quinto livello dove è classificato il documento
-     *
-     * @since 1.1
-     */
-    public static final String LEVEL_5 = "level5";
-
-    /**
-     * Identifica il nome del field che deve contenere l'ID della categoria di
-     * sesto livello dove è classificato il documento
-     *
-     * @since 1.1
-     */
-    public static final String LEVEL_6 = "level6";
 
     /**
      * Nome del field che contiene il nome della categoria di primo livello su
@@ -242,33 +204,33 @@ public class IndexManager {
                         continue;
                     }
                     if (i == 1) {
-                        doc.add(new StringField(LEVEL_1, NodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(NodeData.LEVEL_1, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
                         doc.add(new StringField(LEVEL1_NAME, path[i].toString(), Field.Store.YES));
                     }
                     if (i == 2) {
-                        doc.add(new StringField(LEVEL_2, NodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
-                        doc.add(new StringField(NodeData.getNodeCodeForFilter(path[1].toString()) + "", NodeData.getNodeCodeForFilter(path[2].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(NodeData.LEVEL_2, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(TrainableNodeData.getNodeCodeForFilter(path[1].toString()) + "", TrainableNodeData.getNodeCodeForFilter(path[2].toString()) + "", Field.Store.YES));
                         doc.add(new StringField(LEVEL2_NAME, path[i].toString(), Field.Store.YES));
                     }
                     if (i == 3) {
-                        doc.add(new StringField(LEVEL_3, NodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
-                        doc.add(new StringField(NodeData.getNodeCodeForFilter(path[2].toString()) + "", NodeData.getNodeCodeForFilter(path[3].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(NodeData.LEVEL_3, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(TrainableNodeData.getNodeCodeForFilter(path[2].toString()) + "", TrainableNodeData.getNodeCodeForFilter(path[3].toString()) + "", Field.Store.YES));
                         doc.add(new StringField(LEVEL3_NAME, path[i].toString(), Field.Store.YES));
                     }
                     if (i == 4) {
-                        doc.add(new StringField(LEVEL_4, NodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
-                        doc.add(new StringField(NodeData.getNodeCodeForFilter(path[3].toString()) + "", NodeData.getNodeCodeForFilter(path[4].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(NodeData.LEVEL_4, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(TrainableNodeData.getNodeCodeForFilter(path[3].toString()) + "", TrainableNodeData.getNodeCodeForFilter(path[4].toString()) + "", Field.Store.YES));
                         doc.add(new StringField(LEVEL4_NAME, path[i].toString(), Field.Store.YES));
                     }
                     if (i == 5) {
-                        doc.add(new StringField(LEVEL_5, NodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
-                        doc.add(new StringField(NodeData.getNodeCodeForFilter(path[4].toString()) + "", NodeData.getNodeCodeForFilter(path[5].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(NodeData.LEVEL_5, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(TrainableNodeData.getNodeCodeForFilter(path[4].toString()) + "", TrainableNodeData.getNodeCodeForFilter(path[5].toString()) + "", Field.Store.YES));
                         doc.add(new StringField(LEVEL5_NAME, path[i].toString(), Field.Store.YES));
                     }
                     if (i == 6) {
 
-                        doc.add(new StringField(LEVEL_6, NodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
-                        doc.add(new StringField(NodeData.getNodeCodeForFilter(path[5].toString()) + "", NodeData.getNodeCodeForFilter(path[6].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(NodeData.LEVEL_6, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + "", Field.Store.YES));
+                        doc.add(new StringField(TrainableNodeData.getNodeCodeForFilter(path[5].toString()) + "", TrainableNodeData.getNodeCodeForFilter(path[6].toString()) + "", Field.Store.YES));
                         doc.add(new StringField(LEVEL6_NAME, path[i].toString(), Field.Store.YES));
                     }
 
@@ -479,7 +441,7 @@ public class IndexManager {
                             continue;
                         }
                         level1.setCellValue(StringUtils.firstUpper(level1.getStringCellValue()));
-                        d.add(new StringField(LEVEL_1, NodeData.getNodeCodeForFilter(level1.getStringCellValue()) + "", Field.Store.YES));
+                        d.add(new StringField(NodeData.LEVEL_1, TrainableNodeData.getNodeCodeForFilter(level1.getStringCellValue()) + "", Field.Store.YES));
                         d.add(new StringField(LEVEL1_NAME, level1.getStringCellValue(), Field.Store.YES));
                         Cell level2 = row.getCell(1);
 
@@ -489,36 +451,36 @@ public class IndexManager {
                                 continue;
                             }
                             level2.setCellValue(StringUtils.firstUpper(level2.getStringCellValue()));
-                            d.add(new StringField(LEVEL_2, NodeData.getNodeCodeForFilter(level2.getStringCellValue()) + "", Field.Store.YES));
-                            d.add(new StringField(NodeData.getNodeCodeForFilter(level1.getStringCellValue()) + "", NodeData.getNodeCodeForFilter(level2.getStringCellValue()) + "", Field.Store.YES));
+                            d.add(new StringField(NodeData.LEVEL_2, TrainableNodeData.getNodeCodeForFilter(level2.getStringCellValue()) + "", Field.Store.YES));
+                            d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(level1.getStringCellValue()) + "", TrainableNodeData.getNodeCodeForFilter(level2.getStringCellValue()) + "", Field.Store.YES));
                             d.add(new StringField(LEVEL2_NAME, level2.getStringCellValue(), Field.Store.YES));
 
                             Cell level3 = row.getCell(2);
                             if (level3 != null && level3.getStringCellValue().trim().length() > 0) {
                                 level3.setCellValue(StringUtils.firstUpper(level3.getStringCellValue()));
-                                d.add(new StringField(LEVEL_3, NodeData.getNodeCodeForFilter(level3.getStringCellValue()) + "", Field.Store.YES));
-                                d.add(new StringField(NodeData.getNodeCodeForFilter(level2.getStringCellValue()) + "", NodeData.getNodeCodeForFilter(level3.getStringCellValue()) + "", Field.Store.YES));
+                                d.add(new StringField(NodeData.LEVEL_3, TrainableNodeData.getNodeCodeForFilter(level3.getStringCellValue()) + "", Field.Store.YES));
+                                d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(level2.getStringCellValue()) + "", TrainableNodeData.getNodeCodeForFilter(level3.getStringCellValue()) + "", Field.Store.YES));
                                 d.add(new StringField(LEVEL3_NAME, level3.getStringCellValue(), Field.Store.YES));
 
                                 Cell level4 = row.getCell(3);
                                 if (level4 != null && level4.getStringCellValue().trim().length() > 0) {
                                     level4.setCellValue(StringUtils.firstUpper(level4.getStringCellValue()));
-                                    d.add(new StringField(LEVEL_4, NodeData.getNodeCodeForFilter(level4.getStringCellValue()) + "", Field.Store.YES));
-                                    d.add(new StringField(NodeData.getNodeCodeForFilter(level3.getStringCellValue()) + "", NodeData.getNodeCodeForFilter(level4.getStringCellValue()) + "", Field.Store.YES));
+                                    d.add(new StringField(NodeData.LEVEL_4, TrainableNodeData.getNodeCodeForFilter(level4.getStringCellValue()) + "", Field.Store.YES));
+                                    d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(level3.getStringCellValue()) + "", TrainableNodeData.getNodeCodeForFilter(level4.getStringCellValue()) + "", Field.Store.YES));
                                     d.add(new StringField(LEVEL4_NAME, level4.getStringCellValue(), Field.Store.YES));
 
                                     //New versione 1.1 i livelli aumentano 
                                     Cell level5 = row.getCell(4);
                                     if (level5 != null && level5.getStringCellValue().trim().length() > 0) {
                                         level5.setCellValue(StringUtils.firstUpper(level5.getStringCellValue()));
-                                        d.add(new StringField(LEVEL_5, NodeData.getNodeCodeForFilter(level5.getStringCellValue()) + "", Field.Store.YES));
-                                        d.add(new StringField(NodeData.getNodeCodeForFilter(level4.getStringCellValue()) + "", NodeData.getNodeCodeForFilter(level5.getStringCellValue()) + "", Field.Store.YES));
+                                        d.add(new StringField(NodeData.LEVEL_5, TrainableNodeData.getNodeCodeForFilter(level5.getStringCellValue()) + "", Field.Store.YES));
+                                        d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(level4.getStringCellValue()) + "", TrainableNodeData.getNodeCodeForFilter(level5.getStringCellValue()) + "", Field.Store.YES));
                                         d.add(new StringField(LEVEL5_NAME, level5.getStringCellValue(), Field.Store.YES));
                                         Cell level6 = row.getCell(5);
                                         if (level6 != null && level6.getStringCellValue().trim().length() > 0) {
                                             level6.setCellValue(StringUtils.firstUpper(level6.getStringCellValue()));
-                                            d.add(new StringField(LEVEL_6, NodeData.getNodeCodeForFilter(level6.getStringCellValue()) + "", Field.Store.YES));
-                                            d.add(new StringField(NodeData.getNodeCodeForFilter(level5.getStringCellValue()) + "", NodeData.getNodeCodeForFilter(level6.getStringCellValue()) + "", Field.Store.YES));
+                                            d.add(new StringField(NodeData.LEVEL_6, TrainableNodeData.getNodeCodeForFilter(level6.getStringCellValue()) + "", Field.Store.YES));
+                                            d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(level5.getStringCellValue()) + "", TrainableNodeData.getNodeCodeForFilter(level6.getStringCellValue()) + "", Field.Store.YES));
                                             d.add(new StringField(LEVEL6_NAME, level6.getStringCellValue(), Field.Store.YES));
                                         }
                                     }
@@ -598,23 +560,23 @@ public class IndexManager {
     }
 
     private static void checkForCat(Document d, IndexWriter indexWriter, MyAnalyzer analyzer, FieldType ft) throws Exception {
-        String l1 = d.get(LEVEL_1);
+        String l1 = d.get(NodeData.LEVEL_1);
         String l1n = d.get(LEVEL1_NAME);
-        String l2 = d.get(LEVEL_2);
+        String l2 = d.get(NodeData.LEVEL_2);
         String l2n = d.get(LEVEL2_NAME);
-        String l3 = d.get(LEVEL_3);
+        String l3 = d.get(NodeData.LEVEL_3);
         String l3n = d.get(LEVEL3_NAME);
-        String l4 = d.get(LEVEL_4);
+        String l4 = d.get(NodeData.LEVEL_4);
         String l4n = d.get(LEVEL4_NAME);
         // Versione 1.1
-        String l5 = d.get(LEVEL_5);
+        String l5 = d.get(NodeData.LEVEL_5);
         String l5n = d.get(LEVEL5_NAME);
-        String l6 = d.get(LEVEL_6);
+        String l6 = d.get(NodeData.LEVEL_6);
         String l6n = d.get(LEVEL6_NAME);
         Document dCat = new Document();
         dCat.add(new StringField(STATUS, ACTIVE, Field.Store.YES));
         dCat.add(new Field(UUID, java.util.UUID.randomUUID().toString(), ft));
-        dCat.add(new StringField(LEVEL_1, l1, Field.Store.YES));
+        dCat.add(new StringField(NodeData.LEVEL_1, l1, Field.Store.YES));
         dCat.add(new StringField(LEVEL1_NAME, l1n, Field.Store.YES));
         if (l2 == null) {
             dCat = getDocument(l1n, dCat, indexWriter);
@@ -622,9 +584,9 @@ public class IndexManager {
                 indexWriter.addDocument(dCat);
             }
         } else if (l3 == null) {
-            dCat.add(new StringField(LEVEL_1, l1, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_1, l1, Field.Store.YES));
             dCat.add(new StringField(LEVEL1_NAME, l1n, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_2, l2, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_2, l2, Field.Store.YES));
             dCat.add(new StringField(l1, l2, Field.Store.YES));
             dCat.add(new StringField(LEVEL2_NAME, l2n, Field.Store.YES));
             dCat = getDocument(l2n, dCat, indexWriter);
@@ -632,9 +594,9 @@ public class IndexManager {
                 indexWriter.addDocument(dCat);
             }
         } else if (l4 == null) {
-            dCat.add(new StringField(LEVEL_1, l1, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_2, l2, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_3, l3, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_1, l1, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_2, l2, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_3, l3, Field.Store.YES));
             dCat.add(new StringField(l1, l2, Field.Store.YES));
             dCat.add(new StringField(l2, l3, Field.Store.YES));
             dCat.add(new StringField(LEVEL1_NAME, l1n, Field.Store.YES));
@@ -645,10 +607,10 @@ public class IndexManager {
                 indexWriter.addDocument(dCat);
             }
         } else if (l5 == null) {
-            dCat.add(new StringField(LEVEL_1, l1, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_2, l2, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_3, l3, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_4, l4, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_1, l1, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_2, l2, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_3, l3, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_4, l4, Field.Store.YES));
             dCat.add(new StringField(l1, l2, Field.Store.YES));
             dCat.add(new StringField(l2, l3, Field.Store.YES));
             dCat.add(new StringField(l3, l4, Field.Store.YES));
@@ -661,11 +623,11 @@ public class IndexManager {
                 indexWriter.addDocument(dCat);
             }
         } else if (l6 == null) {
-            dCat.add(new StringField(LEVEL_1, l1, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_2, l2, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_3, l3, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_4, l4, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_5, l5, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_1, l1, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_2, l2, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_3, l3, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_4, l4, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_5, l5, Field.Store.YES));
             dCat.add(new StringField(l1, l2, Field.Store.YES));
             dCat.add(new StringField(l2, l3, Field.Store.YES));
             dCat.add(new StringField(l3, l4, Field.Store.YES));
@@ -680,12 +642,12 @@ public class IndexManager {
                 indexWriter.addDocument(dCat);
             }
         } else {
-            dCat.add(new StringField(LEVEL_1, l1, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_2, l2, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_3, l3, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_4, l4, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_5, l5, Field.Store.YES));
-            dCat.add(new StringField(LEVEL_6, l6, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_1, l1, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_2, l2, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_3, l3, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_4, l4, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_5, l5, Field.Store.YES));
+            dCat.add(new StringField(NodeData.LEVEL_6, l6, Field.Store.YES));
             dCat.add(new StringField(l1, l2, Field.Store.YES));
             dCat.add(new StringField(l2, l3, Field.Store.YES));
             dCat.add(new StringField(l3, l4, Field.Store.YES));
@@ -738,22 +700,22 @@ public class IndexManager {
         TermQuery query = null;
         for (int i = 0; i < path.length; i++) {
             if (i == 1) {
-                query = new TermQuery(new Term(LEVEL_1, NodeData.getNodeCodeForFilter(path[i].toString()) + ""));
+                query = new TermQuery(new Term(NodeData.LEVEL_1, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + ""));
             }
             if (i == 2) {
-                query = new TermQuery(new Term(LEVEL_2, NodeData.getNodeCodeForFilter(path[i].toString()) + ""));
+                query = new TermQuery(new Term(NodeData.LEVEL_2, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + ""));
             }
             if (i == 3) {
-                query = new TermQuery(new Term(LEVEL_3, NodeData.getNodeCodeForFilter(path[i].toString()) + ""));
+                query = new TermQuery(new Term(NodeData.LEVEL_3, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + ""));
             }
             if (i == 4) {
-                query = new TermQuery(new Term(LEVEL_4, NodeData.getNodeCodeForFilter(path[i].toString()) + ""));
+                query = new TermQuery(new Term(NodeData.LEVEL_4, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + ""));
             }
             if (i == 5) {
-                query = new TermQuery(new Term(LEVEL_5, NodeData.getNodeCodeForFilter(path[i].toString()) + ""));
+                query = new TermQuery(new Term(NodeData.LEVEL_5, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + ""));
             }
             if (i == 6) {
-                query = new TermQuery(new Term(LEVEL_6, NodeData.getNodeCodeForFilter(path[i].toString()) + ""));
+                query = new TermQuery(new Term(NodeData.LEVEL_6, TrainableNodeData.getNodeCodeForFilter(path[i].toString()) + ""));
             }
         }
         try {
@@ -791,38 +753,38 @@ public class IndexManager {
         //d.add(new StringField(TEXT, text, Field.Store.YES));
         String l1 = d.get(LEVEL1_NAME);
         if (l1 != null) {
-            d.removeField(LEVEL_1);
-            d.add(new StringField(LEVEL_1, NodeData.getNodeCodeForFilter(l1) + "", Field.Store.YES));
+            d.removeField(NodeData.LEVEL_1);
+            d.add(new StringField(NodeData.LEVEL_1, TrainableNodeData.getNodeCodeForFilter(l1) + "", Field.Store.YES));
         }
         String l2 = d.get(LEVEL2_NAME);
         if (l2 != null) {
-            d.removeField(LEVEL_2);
-            d.add(new StringField(LEVEL_2, NodeData.getNodeCodeForFilter(l2) + "", Field.Store.YES));
-            d.add(new StringField(NodeData.getNodeCodeForFilter(l1) + "", NodeData.getNodeCodeForFilter(l2) + "", Field.Store.YES));
+            d.removeField(NodeData.LEVEL_2);
+            d.add(new StringField(NodeData.LEVEL_2, TrainableNodeData.getNodeCodeForFilter(l2) + "", Field.Store.YES));
+            d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(l1) + "", TrainableNodeData.getNodeCodeForFilter(l2) + "", Field.Store.YES));
         }
         String l3 = d.get(LEVEL3_NAME);
         if (l3 != null) {
-            d.removeField(LEVEL_3);
-            d.add(new StringField(LEVEL_3, NodeData.getNodeCodeForFilter(l3) + "", Field.Store.YES));
-            d.add(new StringField(NodeData.getNodeCodeForFilter(l2) + "", NodeData.getNodeCodeForFilter(l3) + "", Field.Store.YES));
+            d.removeField(NodeData.LEVEL_3);
+            d.add(new StringField(NodeData.LEVEL_3, TrainableNodeData.getNodeCodeForFilter(l3) + "", Field.Store.YES));
+            d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(l2) + "", TrainableNodeData.getNodeCodeForFilter(l3) + "", Field.Store.YES));
         }
         String l4 = d.get(LEVEL4_NAME);
         if (l4 != null) {
-            d.removeField(LEVEL_4);
-            d.add(new StringField(LEVEL_4, NodeData.getNodeCodeForFilter(l4) + "", Field.Store.YES));
-            d.add(new StringField(NodeData.getNodeCodeForFilter(l3) + "", NodeData.getNodeCodeForFilter(l4) + "", Field.Store.YES));
+            d.removeField(NodeData.LEVEL_4);
+            d.add(new StringField(NodeData.LEVEL_4, TrainableNodeData.getNodeCodeForFilter(l4) + "", Field.Store.YES));
+            d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(l3) + "", TrainableNodeData.getNodeCodeForFilter(l4) + "", Field.Store.YES));
         }
         String l5 = d.get(LEVEL5_NAME);
         if (l5 != null) {
-            d.removeField(LEVEL_5);
-            d.add(new StringField(LEVEL_5, NodeData.getNodeCodeForFilter(l5) + "", Field.Store.YES));
-            d.add(new StringField(NodeData.getNodeCodeForFilter(l4) + "", NodeData.getNodeCodeForFilter(l5) + "", Field.Store.YES));
+            d.removeField(NodeData.LEVEL_5);
+            d.add(new StringField(NodeData.LEVEL_5, TrainableNodeData.getNodeCodeForFilter(l5) + "", Field.Store.YES));
+            d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(l4) + "", TrainableNodeData.getNodeCodeForFilter(l5) + "", Field.Store.YES));
         }
         String l6 = d.get(LEVEL6_NAME);
         if (l6 != null) {
-            d.removeField(LEVEL_6);
-            d.add(new StringField(LEVEL_6, NodeData.getNodeCodeForFilter(l6) + "", Field.Store.YES));
-            d.add(new StringField(NodeData.getNodeCodeForFilter(l5) + "", NodeData.getNodeCodeForFilter(l6) + "", Field.Store.YES));
+            d.removeField(NodeData.LEVEL_6);
+            d.add(new StringField(NodeData.LEVEL_6, TrainableNodeData.getNodeCodeForFilter(l6) + "", Field.Store.YES));
+            d.add(new StringField(TrainableNodeData.getNodeCodeForFilter(l5) + "", TrainableNodeData.getNodeCodeForFilter(l6) + "", Field.Store.YES));
         }
         indexWriter.addDocument(d);
     }

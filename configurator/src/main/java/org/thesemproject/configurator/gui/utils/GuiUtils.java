@@ -16,10 +16,10 @@
 package org.thesemproject.configurator.gui.utils;
 
 import java.awt.BorderLayout;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.engine.classification.IndexManager;
 import org.thesemproject.engine.classification.MyAnalyzer;
-import org.thesemproject.engine.classification.NodeData;
+import org.thesemproject.engine.classification.TrainableNodeData;
 import org.thesemproject.engine.classification.Tokenizer;
 import org.thesemproject.configurator.gui.JTableCellRender;
 import org.thesemproject.commons.utils.LogGui;
@@ -75,7 +75,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import org.apache.commons.lang3.StringUtils;
 import org.jdom2.Document;
-import org.thesemproject.commons.classification.INodeData;
+import org.thesemproject.commons.classification.NodeData;
 import org.thesemproject.commons.utils.CommonUtils;
 import org.thesemproject.engine.segmentation.gui.ClassicationTreeNode;
 import org.thesemproject.commons.utils.interning.InternPool;
@@ -767,23 +767,24 @@ public class GuiUtils {
      * @param currentNode nodo corrente (logico)
      * @param currentTreeNode nodo corrente (albero)
      */
-    public static void paintTree(NodeData currentNode, DefaultMutableTreeNode currentTreeNode) {
+    public static void paintTree(TrainableNodeData currentNode, DefaultMutableTreeNode currentTreeNode) {
         if (currentNode != null) {
             if (currentNode.hasChildren()) {
-                List<INodeData> children =  currentNode.getChildrens();
-                Collections.sort(children, new Comparator<INodeData>() {
-                    @Override
-                    public int compare(INodeData t, INodeData t1) {
-                        NodeData x = (NodeData) t;
-                        NodeData x1 = (NodeData) t1;
-                        return (x.nodeName.compareTo(x1.nodeName));
-                    }
+                List<NodeData> cds =  currentNode.getChildrens();
+                List<TrainableNodeData> children = new ArrayList<>();
+                cds.stream().forEach((cd) -> {
+                    children.add((TrainableNodeData) cd);
                 });
-                children.stream().forEach((INodeData c) -> {
-                    NodeData child = (NodeData) c;
+                Collections.sort(children, (TrainableNodeData t, TrainableNodeData t1) -> {
+                    TrainableNodeData x = (TrainableNodeData) t;
+                    TrainableNodeData x1 = (TrainableNodeData) t1;
+                    return (x.nodeName.compareTo(x1.nodeName));
+                });
+                children.stream().forEach((TrainableNodeData c) -> {
+                    TrainableNodeData child = (TrainableNodeData) c;
                     ClassicationTreeNode node = new ClassicationTreeNode(child.isTrained(), child.nodeName);
                     currentTreeNode.add(node);
-                    paintTree((NodeData) currentNode.getNode(child.nodeName), node);
+                    paintTree((TrainableNodeData) currentNode.getNode(child.nodeName), node);
                 });
             }
         }
@@ -1018,7 +1019,7 @@ public class GuiUtils {
             File file = semGui.getExportTreeFileChooser().getSelectedFile();
             semGui.updateLastSelectFolder(file.getAbsolutePath());
             List<String> lines = new ArrayList<>();
-            lines.add(NodeData.getCSVDocument(semGui.getME().getRoot()));
+            lines.add(TrainableNodeData.getCSVDocument(semGui.getME().getRoot()));
             String filePath = file.getAbsolutePath();
             if (!filePath.endsWith(".csv")) {
                 filePath = filePath + ".csv";
@@ -1041,8 +1042,8 @@ public class GuiUtils {
             File file = semGui.getImportTreeFileChooser().getSelectedFile();
             semGui.updateLastSelectFolder(file.getAbsolutePath());
             List<String> lines = GuiUtils.readFileLines(file.getAbsolutePath());
-            NodeData root = NodeData.getNodeData(lines, Integer.parseInt(semGui.getFattoreK().getText()), new InternPool());
-            semGui.getME().storeXml(NodeData.getDocument(root));
+            TrainableNodeData root = TrainableNodeData.getTrainableNodeData(lines, Integer.parseInt(semGui.getFattoreK().getText()), new InternPool());
+            semGui.getME().storeXml(TrainableNodeData.getDocument(root));
             semGui.getRebuildIndex().setSelected(true);
             semGui.initializeModel();
             semGui.setNeedUpdate(false);

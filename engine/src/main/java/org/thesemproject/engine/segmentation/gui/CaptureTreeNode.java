@@ -15,7 +15,7 @@
  */
 package org.thesemproject.engine.segmentation.gui;
 
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.engine.segmentation.CaptureConfiguration;
 import java.util.ArrayList;
 import java.util.HashSet;

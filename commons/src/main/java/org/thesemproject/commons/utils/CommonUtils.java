@@ -27,13 +27,14 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.codehaus.plexus.util.FileUtils;
-import org.thesemproject.commons.classification.IClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 
 /**
  *
  * @author The Sem Project
  */
 public class CommonUtils {
+
     /**
      * Scrive un CSV in UTF-8
      *
@@ -58,7 +59,7 @@ public class CommonUtils {
         }
         return f;
     }
-    
+
     /**
      * legge un xml
      *
@@ -90,7 +91,7 @@ public class CommonUtils {
             }
         }
     }
-    
+
     /**
      * gestice i backup di un file
      *
@@ -125,17 +126,17 @@ public class CommonUtils {
             LogGui.printException(e);
         }
     }
-    
-    
-     /**
+
+    /**
      * Converte un path di classificazione da stringa a classification path
      *
      * @param path path stringa
+     * @param cp path di classificazione da usare
      * @return path di classificazione
      */
-    public static IClassificationPath getClassificationPath(String path, IClassificationPath cp) {
+    public static ClassificationPath getClassificationPath(String path, ClassificationPath cp) {
         String[] categories = path.split(">");
-        
+
         for (int i = 0; i < categories.length; i++) {
             cp.addResult(StringUtils.firstUpper(categories[i]), 1, i);
         }

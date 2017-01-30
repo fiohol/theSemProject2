@@ -1,0 +1,432 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://server.thesemproject.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://server.thesemproject.org/">
+
+<xs:element name="addEvaluation" type="tns:addEvaluation"/>
+
+<xs:element name="addEvaluationResponse" type="tns:addEvaluationResponse"/>
+
+<xs:element name="clearEvaluation" type="tns:clearEvaluation"/>
+
+<xs:element name="clearEvaluationResponse" type="tns:clearEvaluationResponse"/>
+
+<xs:element name="getClassificationTree" type="tns:getClassificationTree"/>
+
+<xs:element name="getClassificationTreeResponse" type="tns:getClassificationTreeResponse"/>
+
+<xs:element name="getClassificationsFromBinary" type="tns:getClassificationsFromBinary"/>
+
+<xs:element name="getClassificationsFromBinaryResponse" type="tns:getClassificationsFromBinaryResponse"/>
+
+<xs:element name="getClassificationsFromFile" type="tns:getClassificationsFromFile"/>
+
+<xs:element name="getClassificationsFromFileResponse" type="tns:getClassificationsFromFileResponse"/>
+
+<xs:element name="getClassificationsFromText" type="tns:getClassificationsFromText"/>
+
+<xs:element name="getClassificationsFromTextResponse" type="tns:getClassificationsFromTextResponse"/>
+
+<xs:element name="getFormattedTextFromBinary" type="tns:getFormattedTextFromBinary"/>
+
+<xs:element name="getFormattedTextFromBinaryResponse" type="tns:getFormattedTextFromBinaryResponse"/>
+
+<xs:element name="getFormattedTextFromFile" type="tns:getFormattedTextFromFile"/>
+
+<xs:element name="getFormattedTextFromFileResponse" type="tns:getFormattedTextFromFileResponse"/>
+
+<xs:element name="getHtmlSegmentationFromBinary" type="tns:getHtmlSegmentationFromBinary"/>
+
+<xs:element name="getHtmlSegmentationFromBinaryResponse" type="tns:getHtmlSegmentationFromBinaryResponse"/>
+
+<xs:element name="getHtmlSegmentationFromFile" type="tns:getHtmlSegmentationFromFile"/>
+
+<xs:element name="getHtmlSegmentationFromFileResponse" type="tns:getHtmlSegmentationFromFileResponse"/>
+
+<xs:element name="getHtmlSegmentationFromText" type="tns:getHtmlSegmentationFromText"/>
+
+<xs:element name="getHtmlSegmentationFromTextResponse" type="tns:getHtmlSegmentationFromTextResponse"/>
+
+<xs:element name="getImageFromBinary" type="tns:getImageFromBinary"/>
+
+<xs:element name="getImageFromBinaryResponse" type="tns:getImageFromBinaryResponse"/>
+
+<xs:element name="getImageFromFile" type="tns:getImageFromFile"/>
+
+<xs:element name="getImageFromFileResponse" type="tns:getImageFromFileResponse"/>
+
+<xs:element name="getImagesFromBinary" type="tns:getImagesFromBinary"/>
+
+<xs:element name="getImagesFromBinaryResponse" type="tns:getImagesFromBinaryResponse"/>
+
+<xs:element name="getImagesFromFile" type="tns:getImagesFromFile"/>
+
+<xs:element name="getImagesFromFileResponse" type="tns:getImagesFromFileResponse"/>
+
+<xs:element name="getLanguage" type="tns:getLanguage"/>
+
+<xs:element name="getLanguageResponse" type="tns:getLanguageResponse"/>
+
+<xs:element name="getSegmentationFromBinary" type="tns:getSegmentationFromBinary"/>
+
+<xs:element name="getSegmentationFromBinaryResponse" type="tns:getSegmentationFromBinaryResponse"/>
+
+<xs:element name="getSegmentationFromFile" type="tns:getSegmentationFromFile"/>
+
+<xs:element name="getSegmentationFromFileResponse" type="tns:getSegmentationFromFileResponse"/>
+
+<xs:element name="getSegmentationFromText" type="tns:getSegmentationFromText"/>
+
+<xs:element name="getSegmentationFromTextResponse" type="tns:getSegmentationFromTextResponse"/>
+
+<xs:element name="getServerDetails" type="tns:getServerDetails"/>
+
+<xs:element name="getServerDetailsResponse" type="tns:getServerDetailsResponse"/>
+
+<xs:element name="getServersNames" type="tns:getServersNames"/>
+
+<xs:element name="getServersNamesResponse" type="tns:getServersNamesResponse"/>
+
+<xs:element name="getTextFromBinary" type="tns:getTextFromBinary"/>
+
+<xs:element name="getTextFromBinaryResponse" type="tns:getTextFromBinaryResponse"/>
+
+<xs:element name="getTextFromFile" type="tns:getTextFromFile"/>
+
+<xs:element name="getTextFromFileResponse" type="tns:getTextFromFileResponse"/>
+
+<xs:element name="tagCloud" type="tns:tagCloud"/>
+
+<xs:element name="tagCloudResponse" type="tns:tagCloudResponse"/>
+
+<xs:element name="tagClouds" type="tns:tagClouds"/>
+
+<xs:element name="tagCloudsResponse" type="tns:tagCloudsResponse"/>
+
+<xs:complexType name="getClassificationsFromText">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="text" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getClassificationsFromTextResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTextFromBinary">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="binary" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTextFromBinaryResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSegmentationFromBinary">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="binary" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSegmentationFromBinaryResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSegmentationFromText">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="text" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSegmentationFromTextResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getServersNames">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getServersNamesResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getImagesFromFile">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getImagesFromFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:base64Binary" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSegmentationFromFile">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSegmentationFromFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFormattedTextFromFile">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFormattedTextFromFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getClassificationsFromBinary">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="binary" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getClassificationsFromBinaryResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getImageFromFile">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getImageFromFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getServerDetails">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getServerDetailsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tagCloud">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="text" type="xs:string" minOccurs="0"/>
+<xs:element name="max" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tagCloudResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getImageFromBinary">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="binary" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getImageFromBinaryResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="clearEvaluation">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="evaluatorName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="clearEvaluationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tagClouds">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="texts" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="max" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tagCloudsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getImagesFromBinary">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="binary" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getImagesFromBinaryResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:base64Binary" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFormattedTextFromBinary">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="binary" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFormattedTextFromBinaryResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLanguage">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="text" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLanguageResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getClassificationsFromFile">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getClassificationsFromFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addEvaluation">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="field" type="xs:string" minOccurs="0"/>
+<xs:element name="fieldConditionOperator" type="xs:string" minOccurs="0"/>
+<xs:element name="fieldConditionValue" type="xs:string" minOccurs="0"/>
+<xs:element name="startPeriod" type="xs:int"/>
+<xs:element name="endPeriod" type="xs:int"/>
+<xs:element name="duration" type="xs:double"/>
+<xs:element name="durationCondition" type="xs:string" minOccurs="0"/>
+<xs:element name="score" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addEvaluationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getHtmlSegmentationFromText">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="text" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getHtmlSegmentationFromTextResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getHtmlSegmentationFromBinary">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="binary" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getHtmlSegmentationFromBinaryResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getClassificationTree">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getClassificationTreeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getHtmlSegmentationFromFile">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getHtmlSegmentationFromFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTextFromFile">
+<xs:sequence>
+<xs:element name="server" type="xs:string" minOccurs="0"/>
+<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTextFromFileResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

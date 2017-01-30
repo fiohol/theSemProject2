@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.thesemproject.commons.classification.IClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 
 /**
  * Configurazione di una cattura
@@ -40,7 +40,7 @@ public class CaptureConfiguration implements Serializable {
     List<CaptureConfiguration> subCaptures;
     Set<String> enabledSegments;
     Set<String> blockedCaptures;
-    private IClassificationPath classificationPath;
+    private ClassificationPath classificationPath;
 
     /**
      * Crea una nuova cattura
@@ -221,7 +221,7 @@ public class CaptureConfiguration implements Serializable {
      *
      * @param cp classification path
      */
-    public void setClassificationPath(IClassificationPath cp) {
+    public void setClassificationPath(ClassificationPath cp) {
         this.classificationPath = cp;
     }
 
@@ -273,7 +273,7 @@ public class CaptureConfiguration implements Serializable {
      *
      * @return classificationPath
      */
-    public IClassificationPath getClassificationPath() {
+    public ClassificationPath getClassificationPath() {
         return classificationPath;
     }
 

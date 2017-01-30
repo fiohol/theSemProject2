@@ -24,13 +24,13 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
 import org.thesemproject.commons.utils.DateUtils;
-import org.thesemproject.engine.classification.ClassificationPath;
+import org.thesemproject.commons.classification.ClassificationPath;
 import org.thesemproject.commons.utils.LogGui;
 import org.thesemproject.engine.segmentation.CaptureConfiguration;
 import org.thesemproject.engine.segmentation.SegmentConfiguration;
 import org.thesemproject.engine.segmentation.SegmentationResults;
 import org.thesemproject.engine.segmentation.functions.DurationsMap;
-import static org.thesemproject.engine.segmentation.functions.DurationsMap.CLASSIFICATIONS;
+
 
 /**
  * Costituisce un elemento di valutazione di un documento segmentato
@@ -64,6 +64,7 @@ public class RankEvaluator implements IRankEvaluator {
         this.score = score;
         this.startYear = 0;
         this.endYear = 0;
+        this.durationCondition = null;
     }
 
     /**
@@ -83,6 +84,7 @@ public class RankEvaluator implements IRankEvaluator {
         this.startYear = startPeriod;
         this.endYear = endPeriod;
         this.score = score;
+        this.durationCondition = null;
     }
 
     /**
@@ -101,6 +103,10 @@ public class RankEvaluator implements IRankEvaluator {
         this.fieldConditionValue = fieldConditionValue;
         this.duration = duration;
         this.durationCondition = durationCondition;
+        if (this.durationCondition != null) {
+            if (this.durationCondition.length() == 0)
+                this.durationCondition = null;
+        }
         this.score = score;
         this.startYear = 0;
         this.endYear = 0;
@@ -126,6 +132,10 @@ public class RankEvaluator implements IRankEvaluator {
         this.endYear = endPeriod;
         this.duration = duration;
         this.durationCondition = durationCondition;
+        if (this.durationCondition != null) {
+            if (this.durationCondition.length() == 0)
+                this.durationCondition = null;
+        }
         this.score = score;
     }
 
@@ -247,15 +257,15 @@ public class RankEvaluator implements IRankEvaluator {
      * Valuta i segmenti in funzione del risultato della segmentazione e delle
      * durate
      *
-     * @param identifiedSegments risultato segmentazione
-     * @param durations durate globali
+     * @param o1 risultato segmentazione
+     * @param o2 durate globali
      * @return punteggio
      */
     @Override
     public double evaluate(Object o1, Object o2) {
         Map<SegmentConfiguration, List<SegmentationResults>> identifiedSegments = (Map<SegmentConfiguration, List<SegmentationResults>>) o1;
         DurationsMap durations = (DurationsMap) o2;
-        if (durationCondition == null && startYear == 0 && endYear == 0) {
+        if ((durationCondition == null)&& startYear == 0 && endYear == 0) {
             return evaluate(identifiedSegments, "", durations);
         } else {
             return evaluate(durations);
@@ -283,7 +293,7 @@ public class RankEvaluator implements IRankEvaluator {
 
     private double evaluate(SegmentationResults sr) { //Valutazioni a livello segmento
         //Valuta il rank sul segmento ricevuto
-        if (CLASSIFICATIONS.equals(this.field)) { //Si tratta di valutare la classificazione
+        if (IRankEvaluator.CLASSIFICATIONS.equals(this.field)) { //Si tratta di valutare la classificazione
             if (EQUALS.equals(this.fieldConditionOperator)) { //Devo valuatare se è una classificazione è uguale
                 List<ClassificationPath> cpl = sr.getClassificationPaths();
                 for (ClassificationPath cp : cpl) {
@@ -440,7 +450,7 @@ public class RankEvaluator implements IRankEvaluator {
                 String value = p.getRight();
                 if ((EQUALS.equals(this.fieldConditionOperator) && value.equals(fieldConditionValue))
                         || (MATCH_REGEX.equals(this.fieldConditionOperator) && value.matches(fieldConditionValue))
-                        || (CLASSIFICATIONS.equals(this.field) && fieldConditionValue.endsWith(value))) {
+                        || (IRankEvaluator.CLASSIFICATIONS.equals(this.field) && fieldConditionValue.endsWith(value))) {
                     double points = 0;
                     if (durationCondition != null) {
                         double dValue = durations.getDurationYears(p);
