@@ -1,0 +1,5 @@
+org.thesemproject.commons.classification
+org.thesemproject.commons.segmentation
+org.thesemproject.commons.tagcloud
+org.thesemproject.commons.utils
+org.thesemproject.commons.utils.interning
