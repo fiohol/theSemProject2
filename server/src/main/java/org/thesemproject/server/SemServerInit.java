@@ -22,7 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 /**
- *
+ * Classe di inizializzazione sistema
  * @author The Sem Project
  */
 public class SemServerInit extends HttpServlet implements ServletContextListener {
@@ -48,6 +48,7 @@ public class SemServerInit extends HttpServlet implements ServletContextListener
      * @param servletConfig configurazione della servlet
      * @throws ServletException eccezione in caso di errore
      */
+    @Override
     public void init(ServletConfig servletConfig) throws ServletException {
         instance = this;
         super.init(servletConfig);
@@ -67,6 +68,7 @@ public class SemServerInit extends HttpServlet implements ServletContextListener
      *
      * @param servletContextEvent evento di inizializzazione del contesto
      */
+    @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         instance = this;
         systemInit();
@@ -77,6 +79,7 @@ public class SemServerInit extends HttpServlet implements ServletContextListener
      *
      * @param servletContextEvent evento di distruzione contesto
      */
+    @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         SemServerConfiguration.getInstance().shutdown();
     }

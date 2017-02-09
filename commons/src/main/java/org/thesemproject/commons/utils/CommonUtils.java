@@ -30,7 +30,7 @@ import org.codehaus.plexus.util.FileUtils;
 import org.thesemproject.commons.classification.ClassificationPath;
 
 /**
- *
+ * Utility varie per gestire XML e CSV e decodificare un classification Path
  * @author The Sem Project
  */
 public class CommonUtils {

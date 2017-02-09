@@ -16,7 +16,7 @@
 package org.thesemproject.commons.utils;
 
 /**
- *
+ * Gestisce utility per manipolare stringhe
  * @author The Sem Project
  */
 public class StringUtils {
