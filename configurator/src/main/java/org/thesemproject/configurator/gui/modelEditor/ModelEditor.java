@@ -317,49 +317,49 @@ public class ModelEditor {
                                 if (javax.swing.SwingUtilities.isRightMouseButton(evt)) {
                                     JPopupMenu popup = new JPopupMenu();
                                     if (isTable(node)) {
-                                        addMenuVoice(popup, "Aggiungi tabella", "/org/thesemproject/opensem/gui/icons16/table.png", menuListener);
+                                        addMenuVoice(popup, "Aggiungi tabella", "/org/thesemproject/configurator/gui/icons16/table.png", menuListener);
                                     }
                                     if (isDataProviders(node)) {
-                                        addMenuVoice(popup, "Aggiungi provider", "/org/thesemproject/opensem/gui/icons16/plug.png", menuListener);
+                                        addMenuVoice(popup, "Aggiungi provider", "/org/thesemproject/configurator/gui/icons16/plug.png", menuListener);
                                     }
                                     if (isDataProvidersChild(node)) {
-                                        addMenuVoice(popup, "Aggiungi relazione", "/org/thesemproject/opensem/gui/icons16/connect.png", menuListener);
+                                        addMenuVoice(popup, "Aggiungi relazione", "/org/thesemproject/configurator/gui/icons16/connect.png", menuListener);
                                     }
                                     if (isSegment(node) || isSegmentChild(node)) {
-                                        addMenuVoice(popup, "Aggiungi segmento", "/org/thesemproject/opensem/gui/icons16/script.png", menuListener);
+                                        addMenuVoice(popup, "Aggiungi segmento", "/org/thesemproject/configurator/gui/icons16/script.png", menuListener);
 
                                     }
                                     if (isCapture(node) || isCaptureChild(node) || isCaptureGroup(node)) {
-                                        addMenuVoice(popup, "Aggiungi cattura", "/org/thesemproject/opensem/gui/icons16/doc_tag.png", menuListener);
+                                        addMenuVoice(popup, "Aggiungi cattura", "/org/thesemproject/configurator/gui/icons16/doc_tag.png", menuListener);
 
                                         if (copyNode != null || cutNode != null) {
-                                            addMenuVoice(popup, "Incolla cattura", "/org/thesemproject/opensem/gui/icons16/page_paste.png", menuListener);
+                                            addMenuVoice(popup, "Incolla cattura", "/org/thesemproject/configurator/gui/icons16/page_paste.png", menuListener);
                                         }
                                     }
                                     if (isCapture(node)) {
-                                        addMenuVoice(popup, "Comprimi catture", "/org/thesemproject/opensem/gui/icons16/compress.png", menuListener);
-                                        addMenuVoice(popup, "Aggiungi gruppo catture", "/org/thesemproject/opensem/gui/icons16/package.png", menuListener);
+                                        addMenuVoice(popup, "Comprimi catture", "/org/thesemproject/configurator/gui/icons16/compress.png", menuListener);
+                                        addMenuVoice(popup, "Aggiungi gruppo catture", "/org/thesemproject/configurator/gui/icons16/package.png", menuListener);
                                     }
                                     if (isCaptureGroup(node)) {
-                                        addMenuVoice(popup, "Comprimi catture", "/org/thesemproject/opensem/gui/icons16/compress.png", menuListener);
-                                        addMenuVoice(popup, "Rinomina gruppo catture", "/org/thesemproject/opensem/gui/icons16/application_edit.png", menuListener);
+                                        addMenuVoice(popup, "Comprimi catture", "/org/thesemproject/configurator/gui/icons16/compress.png", menuListener);
+                                        addMenuVoice(popup, "Rinomina gruppo catture", "/org/thesemproject/configurator/gui/icons16/application_edit.png", menuListener);
                                     }
                                     if (isCaptureChild(node)) {
-                                        addMenuVoice(popup, "Copia cattura", "/org/thesemproject/opensem/gui/icons16/page_copy.png", menuListener);
-                                        addMenuVoice(popup, "Taglia cattura", "/org/thesemproject/opensem/gui/icons16/cut.png", menuListener);
-                                        addMenuVoice(popup, "Rinomina cattura", "/org/thesemproject/opensem/gui/icons16/application_edit.png", menuListener);
+                                        addMenuVoice(popup, "Copia cattura", "/org/thesemproject/configurator/gui/icons16/page_copy.png", menuListener);
+                                        addMenuVoice(popup, "Taglia cattura", "/org/thesemproject/configurator/gui/icons16/cut.png", menuListener);
+                                        addMenuVoice(popup, "Rinomina cattura", "/org/thesemproject/configurator/gui/icons16/application_edit.png", menuListener);
                                     }
                                     if (isForumlas(node)) {
-                                        addMenuVoice(popup, "Aggiungi Formula", "/org/thesemproject/opensem/gui/icons16/doc_tag.png", menuListener);
+                                        addMenuVoice(popup, "Aggiungi Formula", "/org/thesemproject/configurator/gui/icons16/doc_tag.png", menuListener);
                                     }
                                     if (isForumlaDefinition(node)) {
-                                        addMenuVoice(popup, "Rinomina Formula", "/org/thesemproject/opensem/gui/icons16/application_edit.png", menuListener);
+                                        addMenuVoice(popup, "Rinomina Formula", "/org/thesemproject/configurator/gui/icons16/application_edit.png", menuListener);
                                     }
                                     if (isTableChild(node)) {
-                                        addMenuVoice(popup, "Rinomina tabella", "/org/thesemproject/opensem/gui/icons16/application_edit.png", menuListener);
+                                        addMenuVoice(popup, "Rinomina tabella", "/org/thesemproject/configurator/gui/icons16/application_edit.png", menuListener);
                                     }
                                     if (isForumlaDefinition(node) || isTableChild(node) || isSegmentChild(node) || (isCaptureGroup(node)) || (isCaptureChild(node)) || (isDataProvidersChild(node)) || (isDataProvidersRelationship(node))) {
-                                        addMenuVoice(popup, "Elimina", "/org/thesemproject/opensem/gui/icons16/cross.png", menuListener);
+                                        addMenuVoice(popup, "Elimina", "/org/thesemproject/configurator/gui/icons16/cross.png", menuListener);
                                     }
                                     popup.show(tree, evt.getX(), evt.getY());
                                 }

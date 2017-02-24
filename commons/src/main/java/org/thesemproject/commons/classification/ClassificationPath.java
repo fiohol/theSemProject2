@@ -16,13 +16,14 @@
 package org.thesemproject.commons.classification;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 /**
  *
  * Identifica il percorso di classificazione di un documento
  */
-public class ClassificationPath {
+public class ClassificationPath implements Serializable {
 
     /**
      * Costante che identifica una classificazione fatta attraverso il

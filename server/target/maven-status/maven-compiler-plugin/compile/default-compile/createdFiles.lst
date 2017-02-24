@@ -10,6 +10,7 @@ org\thesemproject\server\SemService$15.class
 org\thesemproject\server\SemServerLoginBean.class
 org\thesemproject\server\SemServer.class
 org\thesemproject\server\SemService$6.class
+.netbeans_automatic_build
 org\thesemproject\server\SemServerPwdBean.class
 org\thesemproject\server\SemService$3.class
 org\thesemproject\server\SemServerInit.class

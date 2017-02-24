@@ -138,7 +138,7 @@ public class StopWordsUtils {
                     JMenuItem item;
                     item = new JMenuItem(new DefaultEditorKit.CopyAction());
                     item.setText("Copia");
-                    item.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/opensem/gui/icons16/page_copy.png")));
+                    item.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/configurator/gui/icons16/page_copy.png")));
                     item.setEnabled(ta.getSelectionStart() != ta.getSelectionEnd());
                     menu.add(item);
 
@@ -152,7 +152,7 @@ public class StopWordsUtils {
                         } else {
                             item2 = new JMenuItem("Inserisci '" + stopWord + "' nelle stop words " + language);
                         }
-                        item2.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/opensem/gui/icons16/" + language + ".png")));
+                        item2.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/configurator/gui/icons16/" + language + ".png")));
                         item2.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent ae) {
                                 String[] words = stopWord.split(" ");
@@ -187,7 +187,7 @@ public class StopWordsUtils {
                     JMenuItem item;
                     item = new JMenuItem(new DefaultEditorKit.CopyAction());
                     item.setText("Copia");
-                    item.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/opensem/gui/icons16/page_copy.png")));
+                    item.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/configurator/gui/icons16/page_copy.png")));
                     item.setEnabled(ta.getSelectionStart() != ta.getSelectionEnd());
                     menu.add(item);
 
@@ -200,7 +200,7 @@ public class StopWordsUtils {
                         } else {
                             item2 = new JMenuItem("Inserisci '" + stopWord + "' nelle stop words " + language);
                         }
-                        item2.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/opensem/gui/icons16/" + language + ".png")));
+                        item2.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/configurator/gui/icons16/" + language + ".png")));
                         item2.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent ae) {
                                 String[] words = stopWord.split(" ");

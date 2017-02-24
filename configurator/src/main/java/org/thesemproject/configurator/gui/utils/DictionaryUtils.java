@@ -72,7 +72,7 @@ public class DictionaryUtils {
                     JMenuItem item;
                     item = new JMenuItem(new DefaultEditorKit.CopyAction());
                     item.setText("Copia");
-                    item.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/opensem/gui/icons16/page_copy.png")));
+                    item.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/configurator/gui/icons16/page_copy.png")));
                     item.setEnabled(ta.getSelectionStart() != ta.getSelectionEnd());
                     menu.add(item);
                     JMenuItem item2;
@@ -82,7 +82,7 @@ public class DictionaryUtils {
                         return;
                     }
                     item2 = new JMenuItem("Inserisci '" + selectedWord + "' come nuova definizione");
-                    item2.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/opensem/gui/icons16/book_open.png")));
+                    item2.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/configurator/gui/icons16/book_open.png")));
                     item2.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
                             String name = JOptionPane.showInputDialog(null, "Inserire il nome della definizione", selectedWord);
@@ -116,7 +116,7 @@ public class DictionaryUtils {
                     menu.add(item2);
                     JMenuItem item3;
                     item3 = new JMenuItem("Sostituisci '" + selectedWord + "' con una definizione");
-                    item3.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/opensem/gui/icons16/book_next.png")));
+                    item3.setIcon(new ImageIcon(getClass().getResource("/org/thesemproject/configurator/gui/icons16/book_next.png")));
                     item3.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
                             String definizione = (String) JOptionPane.showInputDialog(null, "Quale definizione aggiornare?", "Seleziona definizione", JOptionPane.QUESTION_MESSAGE, null, defs, defs[0]);

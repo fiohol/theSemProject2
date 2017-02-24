@@ -1,6 +1,5 @@
 org.thesemproject.engine.classification
 org.thesemproject.engine.enrichment
-org.thesemproject.engine.examples
 org.thesemproject.engine.parser
 org.thesemproject.engine.segmentation
 org.thesemproject.engine.segmentation.functions
