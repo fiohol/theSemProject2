@@ -42,6 +42,7 @@ public class SegmentationResults implements Serializable {
     Map<String, String> captureResults;
     private final List<String> lines;
     private final List<ClassificationPath> classificationPaths;
+    private final Set<String> paths;
     private boolean isClassifiedByCapture;
 
     private Date startDate;
@@ -70,6 +71,7 @@ public class SegmentationResults implements Serializable {
         captureResults = new LinkedHashMap<>();
         lines = new ArrayList<>();
         classificationPaths = new ArrayList<>();
+        paths = new HashSet<>();
         isClassifiedByCapture = false;
         startDate = null;
         endDate = null;
@@ -291,7 +293,14 @@ public class SegmentationResults implements Serializable {
         if (path == null) {
             return;
         }
-        this.classificationPaths.addAll(path);
+        for (ClassificationPath cp : path) {
+            String small = cp.toSmallClassString();
+            if (!paths.contains(small)) {
+                this.classificationPaths.add(cp);
+                this.paths.add(small);
+            }
+        }
+        //this.classificationPaths.addAll(path);
 
     }
 
@@ -336,6 +345,7 @@ public class SegmentationResults implements Serializable {
         for (CaptureConfiguration cc : toRemove) {
             if (cc.getClassificationPath() != null) {
                 classificationPaths.remove(cc.getClassificationPath());
+                paths.remove(cc.getClassificationPath().toSmallClassString());
                 if (classificationPaths.isEmpty()) {
                     isClassifiedByCapture = false;
                 }
