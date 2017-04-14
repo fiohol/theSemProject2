@@ -63,12 +63,12 @@ public class DateUtils {
     /**
      * Modi di scrivere gennaio
      */
-    public static final String GEN = "janu(a|Ã¡)r|genn?aio|january|(gen|genn|jan)(\\.)?";
+    public static final String GEN = "janu(a|á)r|genn?aio|january|(gen|genn|jan)(\\.)?";
 
     /**
      * Modi di scrivere febbraio
      */
-    public static final String FEB = "febb?raio|february|febru(a|Ã¡r)|(febbr|febb|feb)(\\.)?";
+    public static final String FEB = "febb?raio|february|febru(a|ár)|(febbr|febb|feb)(\\.)?";
 
     /**
      * Modi di scrivere marzo
@@ -78,22 +78,22 @@ public class DateUtils {
     /**
      * Modi di scrivere aprile
      */
-    public static final String APR = "apr(\\.)?|aprile|apr(i|Ã­)l|april|apri(\\.)?";
+    public static final String APR = "apr(\\.)?|aprile|apr(i|í)l|april|apri(\\.)?";
 
     /**
      * Modi di scrivere maggio
      */
-    public static final String MAG = "m(a|Ã¡)j|magg?io|may|(magg|mag)(\\.)?";
+    public static final String MAG = "m(a|á)j|magg?io|may|(magg|mag)(\\.)?";
 
     /**
      * Modi di scrivere giugno
      */
-    public static final String GIU = "j(u|Ãº)n|giugno|june|(giu|jun)(\\.)?";
+    public static final String GIU = "j(u|ú)n|giugno|june|(giu|jun)(\\.)?";
 
     /**
      * Modi di scrivere luglio
      */
-    public static final String LUG = "j(u|Ãº)l|luglio|july|(jul|lug)(\\.)?";
+    public static final String LUG = "j(u|ú)l|luglio|july|(jul|lug)(\\.)?";
 
     /**
      * Modi di scrivere agosto
@@ -108,7 +108,7 @@ public class DateUtils {
     /**
      * Modi di scrivere ottobre
      */
-    public static final String OTT = "ott?obre|october|okt(o|Ã³)ber|(ott|okt|oct)(\\.)?";
+    public static final String OTT = "ott?obre|october|okt(o|ó)ber|(ott|okt|oct)(\\.)?";
 
     /**
      * Modi di scrivere novembre
@@ -134,12 +134,12 @@ public class DateUtils {
             return null;
         }
         stringDate = stringDate.toLowerCase();
-        stringDate = stringDate.replace("Ã ", "a");
-        stringDate = stringDate.replace("Ã¨", "e");
-        stringDate = stringDate.replace("Ã©", "e");
-        stringDate = stringDate.replace("Ã¬", "i");
-        stringDate = stringDate.replace("Ã²", "o");
-        stringDate = stringDate.replace("Ã¹", "u");
+        stringDate = stringDate.replace("à", "a");
+        stringDate = stringDate.replace("è", "e");
+        stringDate = stringDate.replace("é", "e");
+        stringDate = stringDate.replace("ì", "i");
+        stringDate = stringDate.replace("ò", "o");
+        stringDate = stringDate.replace("ù", "u");
         stringDate = stringDate.replaceAll("\\b(" + GEN + ")\\b", " 01 ");
         stringDate = stringDate.replaceAll("\\b(" + FEB + ")\\b", " 02 ");
         stringDate = stringDate.replaceAll("\\b(" + MAR + ")\\b", " 03 ");
